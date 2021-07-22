@@ -8,6 +8,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 os.environ['SPARK_HOME'] = '/opt/spark'
+os.environ['PATH'] += "/opt/spark/bin:/opt/spark/sbin"
 sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
@@ -21,7 +22,7 @@ dag = DAG("DataLoad", default_args=default_args, schedule_interval=timedelta(day
           )
 t1 = BashOperator(
     task_id='DataLoad',
-    bash_command='echo $PATH',
+    bash_command='echo $PATH & echo $SPARK_HOME',
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
