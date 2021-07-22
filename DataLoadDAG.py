@@ -14,7 +14,6 @@ sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
     'owner': 'ko3lof',
-    'start_date': datetime(2021, 7, 22),
     'depends_on_past': False,
     # 'schedule_interval': '30 11 * * 4',
     'retries': 2
