@@ -1,12 +1,14 @@
 from datetime import timedelta, datetime
+
+import airflow
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 default_args = {
     'owner': 'ko3lof',
-    'start_date': datetime(2021, 7, 22),
+    'start_date': airflow.utils.dates.days_ago(1),
     'depends_on_past': False,
-    'schedule_interval': '30 11 * * 4',
+    # 'schedule_interval': '30 11 * * 4',
     'retries': 2
 }
 dag = DAG("DataLoad", default_args=default_args, schedule_interval=timedelta(days=1)
