@@ -22,13 +22,13 @@ dag = DAG("DataLoad", default_args=default_args, schedule_interval=timedelta(day
           )
 t1 = BashOperator(
     task_id='DataLoad1',
-    bash_command='bash export',
+    bash_command='echo 1',
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
 t2 = BashOperator(
     task_id='DataLoad2',
-    bash_command='bash echo $PATH',
+    bash_command='echo $PATH',
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
