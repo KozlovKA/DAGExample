@@ -4,7 +4,8 @@ import airflow
 import os
 import sys
 from airflow import DAG
-# from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+from airflow.models import Variable
+from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.operators.bash import BashOperator
 
 os.environ['SPARK_HOME'] = '/opt/spark'
@@ -13,19 +14,20 @@ sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
     'owner': 'ko3lof',
-    'start_date': airflow.utils.dates.days_ago(1),
+    'start_date': datetime(2021, 7, 22),
     'depends_on_past': False,
     # 'schedule_interval': '30 11 * * 4',
     'retries': 2
 }
-dag = DAG("DataLoad", default_args=default_args, schedule_interval=timedelta(days=1)
-          )
-t1 = BashOperator(
-    task_id='DataLoad1',
-    bash_command='echo hello world ',
-    params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
-    dag=dag
-)
+dag = DAG("DataLoad",
+          default_args=default_args,
+          schedule_interval="30 11 * * 4")
+spark_home = Variable.get("SPARK_HOME")
+t1 = SparkSubmitOperator(task_id='DataLoad',
+                         application="/home/ko3lof/testing-assembly-0.1.jar",
+                         name="DataLoad",
+                         dag=dag
+                         )
 t2 = BashOperator(
     task_id='DataLoad2',
     bash_command='echo $PATH ',
