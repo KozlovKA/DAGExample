@@ -1,8 +1,13 @@
 from datetime import timedelta, datetime
 
 import airflow
+import os
+import sys
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+
+os.environ['SPARK_HOME'] = '/opt/spark/'
+sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
     'owner': 'ko3lof',
