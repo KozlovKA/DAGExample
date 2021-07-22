@@ -8,7 +8,7 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 
 os.environ['SPARK_HOME'] = '/opt/spark'
-os.environ['PATH'] += "/opt/spark/bin:/opt/spark/sbin"
+os.environ['PATH'] += "/opt/spark/bin:/opt/spark/sbin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
 sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
@@ -33,4 +33,4 @@ t2 = BashOperator(
     dag=dag
 )
 
-t1>>t2
+t1 >> t2
