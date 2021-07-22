@@ -32,5 +32,11 @@ t2 = BashOperator(
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
+t3 = BashOperator(
+    task_id='DataLoad3',
+    bash_command='spark-submit --class {{ params.class }} {{ params.jar }}',
+    params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
+    dag=dag
+)
 
-t1 >> t2
+t1 >> [t2, t3]
