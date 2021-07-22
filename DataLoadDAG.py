@@ -21,10 +21,16 @@ default_args = {
 dag = DAG("DataLoad", default_args=default_args, schedule_interval=timedelta(days=1)
           )
 t1 = BashOperator(
-    task_id='DataLoad',
+    task_id='DataLoad1',
     bash_command='echo $PATH & echo $SPARK_HOME',
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
+t2 = BashOperator(
+    task_id='DataLoad2',
+    bash_command='echo $SPARK_HOME',
+    params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
+    dag=dag
+)
 
-t1
+t1>>t2
