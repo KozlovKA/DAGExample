@@ -29,8 +29,6 @@ spark_home = Variable.get("SPARK_HOME")
 t1 = SparkSubmitOperator(task_id='DataLoad',
                          application="/home/ko3lof/testing-assembly-0.1.jar",
                          name="DataLoad",
-                         retries=2,
-                         retry_delay=datetime(year=0, month=0, day=0, hour=0, minute=0, second=120),
                          dag=dag
                          )
 t2 = BashOperator(
