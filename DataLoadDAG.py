@@ -23,15 +23,15 @@ dag = DAG("DataLoad",
           start_date=days_ago(2),
           schedule_interval="30 11 * * 4")
 
-t1 = SparkSubmitOperator(task_id='DataLoad',
+t2 = SparkSubmitOperator(task_id='DataLoad',
                          application="/home/ko3lof/testing-assembly-0.1.jar",
                          name="DataLoad",
                          dag=dag,
                          conn_id="spark"
                          )
-t2 = BashOperator(
+t1 = BashOperator(
     task_id='DataLoad2',
-    bash_command='echo $PATH ',
+    bash_command='export -p',
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
