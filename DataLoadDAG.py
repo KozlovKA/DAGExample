@@ -18,7 +18,6 @@ sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 default_args = {
     'owner': 'ko3lof',
     'depends_on_past': False,
-    "start_date": datetime(now.year, now.month, now.day),
     # 'schedule_interval': '30 11 * * 4',
 }
 dag = DAG("DataLoad",
