@@ -12,7 +12,7 @@ from airflow.utils.dates import days_ago
 now = datetime.now
 
 os.environ['SPARK_HOME'] = '/opt/spark'
-os.environ['PATH'] += "/opt/spark/bin:/opt/spark/sbin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin"
+os.environ['PATH'] += ":/opt/spark/bin:/opt/spark/sbin"
 sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
