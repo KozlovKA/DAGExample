@@ -29,7 +29,8 @@ spark_home = Variable.get("SPARK_HOME")
 t1 = SparkSubmitOperator(task_id='DataLoad',
                          application="/home/ko3lof/testing-assembly-0.1.jar",
                          name="DataLoad",
-                         dag=dag
+                         dag=dag,
+                         conn_id="spark"
                          )
 t2 = BashOperator(
     task_id='DataLoad2',
