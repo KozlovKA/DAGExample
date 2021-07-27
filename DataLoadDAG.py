@@ -22,12 +22,17 @@ dag = DAG("DataLoad",
           default_args=default_args,
           start_date=days_ago(2),
           schedule_interval="30 11 * * 4")
+spark_config = {
+    "master": "spark://spark-air-master-0.spark-air-headless.airflow.svc.cluster.local:7077"
+}
 
 t3 = SparkSubmitOperator(task_id='DataLoad',
-                         application="/home/ko3lof/testing-assembly-0.1.jar",
                          name="DataLoad",
+                         jars="local:///home/ko3lof/testing-assembly-0.1.jar",
                          dag=dag,
-                         conn_id="spark"
+                         conn_id="spark",
+                         verbose=1,
+                         conf=spark_config
                          )
 t1 = BashOperator(
     task_id='DataLoad2',
