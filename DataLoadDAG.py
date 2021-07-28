@@ -30,10 +30,13 @@ t3 = SparkSubmitOperator(task_id='DataLoad',
                          name="DataLoad",
                          application="/jar/testing-assembly-0.1.jar",
                          dag=dag,
+                         conf={
+                            'dbPassword':Variable.get('dbPassword'),
+                             'dbUsername': Variable.get('dbUsername')
+                         },
                          conn_id="spark",
                          verbose=1,
-                         java_class="DataLoad",
-                         conf=spark_config
+                         java_class="DataLoad"
                          )
 t1 = BashOperator(
     task_id='DataLoad2',
