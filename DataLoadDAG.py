@@ -26,30 +26,35 @@ spark_config = {
     "master": "spark://spark-air-master-0.spark-air-headless.airflow.svc.cluster.local:7077"
 }
 
-t3 = SparkSubmitOperator(task_id='DataLoad',
+t2 = SparkSubmitOperator(task_id='DataLoad',
                          name='DataLoad',
                          application='local:///jar/testing-assembly-0.1.jar',
                          dag=dag,
                          conf={
-                             'dbPassword': Variable.get('dbPassword'),
-                             'dbUsername': Variable.get('dbUsername'),
                              "spark.hadoop.fs.stocator.scheme.list": "cos",
                              'spark.submit.deployMode': 'cluster',
                              'fs.stocator.cos.impl': 'com.ibm.stocator.fs.cos.COSAPIClient',
                              'fs.cos.impl': 'com.ibm.stocator.fs.ObjectStoreFileSystem',
                              'spark.kubernetes.container.image': 'ko3lof/spark:test',
-                             'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark'
+                             'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
+                             'spark.kubernetes.driverEnv.dbPassword': Variable.get('dbPassword'),
+                             'spark.kubernetes.driverEnv.dbUsername': Variable.get('dbUsername'),
+                             'spark.kubernetes.allocation.batch.size': "10"
+
                          },
                          application_args=[Variable.get('dbPassword'), Variable.get('dbUsername')],
                          conn_id='spark',
                          verbose=1,
-                         java_class='DataLoad'
+                         java_class='DataTransformation'
                          )
 t1 = BashOperator(
-    task_id='DataLoad2',
-    bash_command='export -p',
-    params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
+    task_id='starTime',
+    bash_command='date',
     dag=dag
 )
-
-t3
+t3 = BashOperator(
+    task_id='endTime',
+    bash_command='date',
+    dag=dag
+)
+t1 >> t2 >> t3
