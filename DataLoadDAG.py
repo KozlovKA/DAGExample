@@ -27,23 +27,23 @@ spark_config = {
 }
 
 t3 = SparkSubmitOperator(task_id='DataLoad',
-                         name="DataLoad",
-                         application="local:///jar/testing-assembly-0.1.jar",
+                         name='DataLoad',
+                         application='local:///jar/testing-assembly-0.1.jar',
                          dag=dag,
                          conf={
                              'dbPassword': Variable.get('dbPassword'),
                              'dbUsername': Variable.get('dbUsername'),
                              "spark.hadoop.fs.stocator.scheme.list": "cos",
-                             "spark.submit.deployMode": "cluster",
-                             "fs.stocator.cos.impl": "com.ibm.stocator.fs.cos.COSAPIClient",
-                             "fs.cos.impl": "com.ibm.stocator.fs.ObjectStoreFileSystem",
+                             'spark.submit.deployMode': 'cluster',
+                             'fs.stocator.cos.impl': 'com.ibm.stocator.fs.cos.COSAPIClient',
+                             'fs.cos.impl': 'com.ibm.stocator.fs.ObjectStoreFileSystem',
                              'spark.kubernetes.container.image': 'ko3lof/spark:1.0.1',
                              'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark'
                          },
                          application_args=[Variable.get('dbPassword'), Variable.get('dbUsername')],
-                         conn_id="spark",
+                         conn_id='spark',
                          verbose=1,
-                         java_class="DataLoad"
+                         java_class='DataLoad'
                          )
 t1 = BashOperator(
     task_id='DataLoad2',
