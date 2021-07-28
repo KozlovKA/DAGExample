@@ -28,10 +28,11 @@ spark_config = {
 
 t3 = SparkSubmitOperator(task_id='DataLoad',
                          name="DataLoad",
-                         jars="local:///home/ko3lof/testing-assembly-0.1.jar",
+                         application="local:///home/ko3lof/testing-assembly-0.1.jar",
                          dag=dag,
                          conn_id="spark",
                          verbose=1,
+                         java_class="DataLoad",
                          conf=spark_config
                          )
 t1 = BashOperator(
@@ -40,11 +41,5 @@ t1 = BashOperator(
     params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
     dag=dag
 )
-t2 = BashOperator(
-    task_id='DataLoad3',
-    bash_command='export JAVA_HOME=/usr/java/openjdk-11',
-    params={'class': 'DataLoad', 'jar': '/home/ko3lof/testing-assembly-0.1.jar'},
-    dag=dag
-)
 
-t2 >> t1 >> t3
+t3
