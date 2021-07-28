@@ -31,14 +31,15 @@ t3 = SparkSubmitOperator(task_id='DataLoad',
                          application='local:///jar/testing-assembly-0.1.jar',
                          dag=dag,
                          conf={
-                             'dbPassword': Variable.get('dbPassword'),
-                             'dbUsername': Variable.get('dbUsername'),
                              "spark.hadoop.fs.stocator.scheme.list": "cos",
                              'spark.submit.deployMode': 'cluster',
                              'fs.stocator.cos.impl': 'com.ibm.stocator.fs.cos.COSAPIClient',
                              'fs.cos.impl': 'com.ibm.stocator.fs.ObjectStoreFileSystem',
                              'spark.kubernetes.container.image': 'ko3lof/spark:test',
-                             'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark'
+                             'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
+                             'spark.kubernetes.driverEnv.dbPassword': Variable.get('dbPassword'),
+                             'spark.kubernetes.driverEnv.dbUsername': Variable.get('dbUsername'),
+
                          },
                          application_args=[Variable.get('dbPassword'), Variable.get('dbUsername')],
                          conn_id='spark',
