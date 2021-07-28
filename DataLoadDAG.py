@@ -28,7 +28,7 @@ spark_config = {
 
 t3 = SparkSubmitOperator(task_id='DataLoad',
                          name="DataLoad",
-                         application="local:///home/ko3lof/testing-assembly-0.1.jar",
+                         application="local:///jar/testing-assembly-0.1.jar",
                          dag=dag,
                          conn_id="spark",
                          verbose=1,
