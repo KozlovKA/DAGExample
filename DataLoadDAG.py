@@ -22,9 +22,7 @@ dag = DAG("DataLoad",
           default_args=default_args,
           start_date=days_ago(2),
           schedule_interval="30 11 * * 4")
-spark_config = {
-    "master": "spark://spark-air-master-0.spark-air-headless.airflow.svc.cluster.local:7077"
-}
+
 
 t2 = SparkSubmitOperator(task_id='DataLoad',
                          name='DataLoad',
@@ -45,7 +43,6 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.allocation.batch.size': "10"
 
                          },
-                         application_args=[Variable.get('dbPassword'), Variable.get('dbUsername')],
                          conn_id='spark',
                          verbose=1,
                          java_class='DataTransformation'
