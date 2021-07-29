@@ -37,9 +37,9 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
                              'spark.kubernetes.driverEnv.dbPassword': Variable.get('dbPassword'),
                              'spark.kubernetes.driverEnv.dbUsername': Variable.get('dbUsername'),
-                             'spark.kubernetes.driverEnv.dbPassword': Variable.get('secret.key'),
-                             'spark.kubernetes.driverEnv.dbPassword': Variable.get('endpoint'),
-                             'spark.kubernetes.driverEnv.dbPassword': Variable.get('access.key'),
+                             'spark.kubernetes.driverEnv.secret.key': Variable.get('secret.key'),
+                             'spark.kubernetes.driverEnv.endpoint': Variable.get('endpoint'),
+                             'spark.kubernetes.driverEnv.access.key': Variable.get('access.key'),
                              'spark.kubernetes.allocation.batch.size': "10"
 
                          },
