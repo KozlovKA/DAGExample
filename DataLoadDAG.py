@@ -26,7 +26,7 @@ dag = DAG("DataLoad",
 
 t2 = SparkSubmitOperator(task_id='DataLoad',
                          name='DataLoad',
-                         application='local:///jar/testing-assembly-0.1.jar',
+                         application='local:///jar/ibaTest-assembly-0.1.jar',
                          dag=dag,
                          conf={
                              "spark.hadoop.fs.stocator.scheme.list": "cos",
