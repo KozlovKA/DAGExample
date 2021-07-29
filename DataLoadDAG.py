@@ -45,7 +45,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                          },
                          conn_id='spark',
                          verbose=1,
-                         java_class='DataTransformation'
+                         java_class='by.kozlov.iba.DataTransformation'
                          )
 t1 = BashOperator(
     task_id='starTime',
