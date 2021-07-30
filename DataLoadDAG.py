@@ -39,7 +39,6 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.driverEnv.secret.key': Variable.get('secret.key'),
                              'spark.kubernetes.driverEnv.endpoint': Variable.get('endpoint'),
                              'spark.kubernetes.driverEnv.access.key': Variable.get('access.key'),
-                             'spark.kubernetes.allocation.batch.size': "3",
                              'spark.executor.instances': "3"
 
                          },
