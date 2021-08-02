@@ -43,7 +43,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.namespace': 'airflow',
                              # 'spark.kubernetes.executor.request.cores': '1.0',
                              'spark.kubernetes.allocation.batch.size': '10',
-                             'spark.executor.cores': '3',
+                             'spark.executor.cores': '4',
 
                          },
                          conn_id='spark',
