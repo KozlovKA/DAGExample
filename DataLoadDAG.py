@@ -50,7 +50,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.driverEnv.access.key': Variable.get('access.key'),
                              'spark.executor.instances': '11',
                              'spark.driver.memory': "500m",
-                             'spark.executor.memory': '15m',
+                             'spark.executor.memory': '150m',
                              'spark.kubernetes.namespace': 'airflow',
                              'spark.kubernetes.allocation.batch.size': '10'
                              # 'spark.kubernetes.executor.request.cores': '1.0',
