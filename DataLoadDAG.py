@@ -10,7 +10,7 @@ from airflow.operators.bash import BashOperator
 from airflow.utils.dates import days_ago
 
 # os.environ['SPARK_HOME'] = '/opt/spark'
-# os.environ['PATH'] += ":/opt/spark/bin:/opt/spark/sbin"
+# os.environ['PATH'] += ':/opt/spark/bin:/opt/spark/sbin'
 # sys.path.append(os.path.join(os.environ['SPARK_HOME'], 'bin'))
 
 default_args = {
@@ -18,24 +18,24 @@ default_args = {
     'depends_on_past': False,
     # 'schedule_interval': '30 11 * * 4',
 }
-dag = DAG("DataLoad",
+dag = DAG('DataLoad',
           default_args=default_args,
           start_date=days_ago(2),
-          schedule_interval="30 11 * * 4")
+          schedule_interval='30 11 * * 4')
 
 t2 = SparkSubmitOperator(task_id='DataLoad',
                          name='DataLoad',
                          application='local:///jar/ibaTask-assembly-0.1.jar',
                          dag=dag,
                          conf={
-                             "spark.hadoop.fs.stocator.scheme.list": "cos",
+                             'spark.hadoop.fs.stocator.scheme.list': 'cos',
                              'spark.submit.deployMode': 'cluster',
-                             "fs.stocator.cos.scheme": "cos",
-                             "fs.cos.sparkobject123.access.key": Variable.get('access.key'),
-                             "fs.cos.sparkobject123.endpoint": Variable.get('endpoint'),
-                             "fs.cos.sparkobject123.secret.key": Variable.get('secret.key'),
+                             'fs.stocator.cos.scheme': 'cos',
+                             'fs.cos.sparkobject123.access.key': Variable.get('access.key'),
+                             'fs.cos.sparkobject123.endpoint': Variable.get('endpoint'),
+                             'fs.cos.sparkobject123.secret.key': Variable.get('secret.key'),
                              'fs.stocator.cos.impl': 'com.ibm.stocator.fs.cos.COSAPIClient',
-                             "fs.cos.service.v2.signer.type": "false",
+                             'fs.cos.service.v2.signer.type': 'false',
                              'fs.cos.impl': 'com.ibm.stocator.fs.ObjectStoreFileSystem',
                              'spark.kubernetes.container.image': 'ko3lof/spark:check',
                              'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
