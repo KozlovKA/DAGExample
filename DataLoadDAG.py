@@ -41,7 +41,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.driver.pod.name': 'driver',
                              'spark.kubernetes.executor.lostCheck.maxAttempts': '2',
                              'spark.kubernetes.driver.request.cores': '1',
-                             'spark.kubernetes.executor.request.cores': '0.6',
+                             'spark.kubernetes.executor.request.cores': '1',
                              'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
                              'spark.kubernetes.driverEnv.dbPassword': Variable.get('dbPassword'),
                              'spark.kubernetes.driverEnv.dbUsername': Variable.get('dbUsername'),
@@ -58,11 +58,11 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.hadoop.url': "jdbc:db2://dashdb-txn-sbox-yp-dal09-14.services.dal.bluemix.net:50000/BLUDB:user=" + Variable.get(
                                  'dbUsername') + ";PWD=" + Variable.get('dbPassword') + ";Security=SSL;",
                              'spark.hadoop.dbtable': "PRT00338.product_record",
-                             'spark.executor.instances': '10',
+                             'spark.executor.instances': '5',
                              # 'spark.driver.memory': "500m",
                              # 'spark.executor.memory': '480m',
                              'spark.kubernetes.namespace': 'airflow',
-                             'spark.kubernetes.allocation.batch.size': '10'
+                             'spark.kubernetes.allocation.batch.size': '5'
                              # 'spark.kubernetes.executor.request.cores': '1.0',
                              # 'spark.executor.cores': '2',
 
