@@ -54,6 +54,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.myvariables.numPartitions': "9",
                              'spark.myvariables.PartitionColumn': "product_group",
                              'spark.myvariables.lowerBound': "1",
+                             'spark.myvariables.fetchsize':'500',
                              'spark.myvariables.upperBound': "10",
                              'spark.myvariables.url': "jdbc:db2://dashdb-txn-sbox-yp-dal09-14.services.dal.bluemix.net:50000/BLUDB:user=" + Variable.get(
                                  'dbUsername') + ";PWD=" + Variable.get('dbPassword') + ";Security=SSL;",
