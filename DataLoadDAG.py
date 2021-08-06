@@ -41,7 +41,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.driver.pod.name': 'driver',
                              'spark.kubernetes.executor.lostCheck.maxAttempts': '2',
                              'spark.kubernetes.driver.request.cores': '1',
-                             # 'spark.kubernetes.executor.request.cores': '0.5',
+                             'spark.kubernetes.executor.request.cores': '500m',
                              'spark.kubernetes.authenticate.driver.serviceAccountName': 'spark',
                              'spark.kubernetes.driverEnv.dbPassword': Variable.get('dbPassword'),
                              'spark.kubernetes.driverEnv.dbUsername': Variable.get('dbUsername'),
@@ -65,7 +65,7 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.kubernetes.namespace': 'airflow',
                              'spark.kubernetes.allocation.batch.size': '10',
                              # 'spark.kubernetes.executor.request.cores': '1.0',
-                             'spark.executor.cores': '0.5'
+                             # 'spark.executor.cores': '0.5'
 
                          },
                          conn_id='spark',
