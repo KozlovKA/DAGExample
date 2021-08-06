@@ -59,9 +59,9 @@ t2 = SparkSubmitOperator(task_id='DataLoad',
                              'spark.myvariables.url': "jdbc:db2://dashdb-txn-sbox-yp-dal09-14.services.dal.bluemix.net:50000/BLUDB:user=" + Variable.get(
                                  'dbUsername') + ";PWD=" + Variable.get('dbPassword') + ";Security=SSL;",
                              'spark.myvariables.dbtable': "PRT00338.product_record",
-                             'spark.executor.instances': '5',
-                             # 'spark.driver.memory': "500m",
-                             # 'spark.executor.memory': '480m',
+                             'spark.executor.instances': '10',
+                             # 'spark.driver.memory': "185m",
+                             # 'spark.executor.memory': '80m',
                              'spark.kubernetes.namespace': 'airflow',
                              'spark.kubernetes.allocation.batch.size': '10'
                              # 'spark.kubernetes.executor.request.cores': '1.0',
